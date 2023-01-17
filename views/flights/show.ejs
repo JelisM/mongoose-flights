@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<section id="show-page">
+  <div> Details </div>
+  <div><%= flight.details %></div>
+  <div>arrival: </div>
+  <div><%= flight.arrival %></div>
+  <div : </div>
+  
+<br><br><h2>flight</h2>
+<form id="add-flight-form" method="POST"
+  action="/flights/<%= flight._id %>/reviews">
+  <label>flight:</label>
+  <textarea name="content"></textarea>
+  <label>flight:</label>
+  
+  </select>
+  <input type="submit" value="Add flight">
+</form>
+  <% if (flight.reviews.lenght) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Review</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flights.details.forEach(function(d) { %>
+          <tr>
+            <td><%= d.createdAt.toLocaleDateString() %></td>
+            <td><%= d.content %></td>
+            <td><%= d.rating %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+     <h5>No Reviews Yet</h5>
+  <% } %>
+
+<%- include('../partials/footer') %>
