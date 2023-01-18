@@ -33,16 +33,16 @@ const  flightSchema = new Schema ({
         type: String,
         enum: ['AUS', 'DFW', 'DEN','LAX','SAN'],
         default: 'DEN',
-        required: true,
+       
     
     },
     
     
     flightNo: {
         type: Number,
-        min:[10, ""],
-        max:[9999, ""],
-        required: true,
+        min:10,
+        max:9999, 
+       
 
     },
 
@@ -56,7 +56,6 @@ const  flightSchema = new Schema ({
         timestamps: true
 });
 
-
-
-// Compile the schema into a model and export it
+// compile the Schema into a model and exports it 
 module.exports = mongoose.model('Flight', flightSchema);
+
