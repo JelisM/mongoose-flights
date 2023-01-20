@@ -1,43 +1,90 @@
 <%- include('../partials/header') %>
 
-<section id="show-page">
-  <div> Details </div>
-  <div><%= flight.details %></div>
-  <div>arrival: </div>
-  <div><%= flight.arrival %></div>
-  <div : </div>
-  
-<br><br><h2>flight</h2>
-<form id="add-flight-form" method="POST"
-  action="/flights/<%= flight._id %>/reviews">
-  <label>flight:</label>
-  <textarea name="content"></textarea>
-  <label>flight:</label>
-  
-  </select>
-  <input type="submit" value="Add flight">
-</form>
-  <% if (flight.reviews.lenght) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Review</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% flights.details.forEach(function(d) { %>
-          <tr>
-            <td><%= d.createdAt.toLocaleDateString() %></td>
-            <td><%= d.content %></td>
-            <td><%= d.rating %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  <% } else { %>
-     <h5>No Reviews Yet</h5>
-  <% } %>
+    <section>
+        <a href="/flights/<%= flight._id%>/tickets/new">New Ticket</a>
+        <div>Airport: </div>
+        <div>
+            <%= flight.airport%>
+        </div>
+        <div>Airline: </div>
+        <div>
+            <%= flight.airline %>
+        </div>
+        <div>Flight Number: </div>
+        <div>
+            <%= flight.flightNo%>
+        </div>
+        <div>Departure Date: </div>
+        <div>
+            <%= flight.departs%>
+        </div>
+        <br><br>
+        <h2>Destinations</h2>
+        <form action="/flights/<%= flight._id %>/destinations" method="POST">
+            <label>Destination:</label>
+            <select name="airport">
+                <option value="AUS">AUS</option>
+                <option value="DFW">DFW</option>
+                <option value="DEN">DEN</option>
+                <option value="LAX">LAX</option>
+                <option value="SAN">SAN</option>
+                <option value="JFK">JFK</option>
+                <option value="MIA">MIA</option>
+                <option value="GRU">GRU</option>
+            </select>
+            <br><br>
+            <label>Arrival</label>
+            <input type="datetime-local" name="arrival">
+            <input type="submit" value="add">
+        </form>
 
-<%- include('../partials/footer') %>
+        <% if (flight.destinations.length){ %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Arrival Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% flight.destinations.forEach(function(d) { %>
+                        <tr>
+                            <td>
+                                <%= d.airport %>
+                            </td>
+                            <td>
+                                <%= d.arrival%>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <h5>No Destination Details Yet.</h5>
+                <% } %>
+
+                    <h3>Ticket</h3>
+                    <table>
+                        <thead>
+                            <th>
+                                Seat
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                        </thead>
+                        <% tickets.forEach(function(ticket) { %>
+                            <tr>
+                                <td>
+                                    <%= ticket.seat %>
+                                </td>
+                                <td>
+                                    <%= ticket.price %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </table>
+
+
+
+                    <%- include('../partials/footer')%>
