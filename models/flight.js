@@ -16,46 +16,37 @@ arrival: {
 },
 
 
-
 }, {
     timestamps: true
 
 })
-const  flightSchema = new Schema ({
+const flightSchema = new Schema({
     airline: {
         type: String,
         enum: ['American', 'Southwest', 'United'],
-        
-    
-    },
 
+    },
     airport: {
         type: String,
-        enum: ['AUS', 'DFW', 'DEN','LAX','SAN'],
+        enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
         default: 'DEN',
-       
-    
+        require: true,
     },
-    
-    
     flightNo: {
         type: Number,
-        min:10,
-        max:9999, 
-       
+        min: 10,
+        max: 9999,
+        require: true,
 
     },
-
     departs: {
         type: Date,
-        default: () => Date.now() + 365*24*60*60000, // add 1 year from now 
-
+        default: () => Date.now() + 365 * 24 * 60 * 60000
     },
     destinations: [destinationSchema]
-    }, {
-        timestamps: true
+}, {
+    timestamps: true
 });
 
 // compile the Schema into a model and exports it 
 module.exports = mongoose.model('Flight', flightSchema);
-
